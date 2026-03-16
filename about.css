@@ -1,0 +1,75 @@
+/* === ОБЩИЕ СТИЛИ === */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%; /* Важно для прижатия подвала */
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f5f7f2;
+    display: flex;
+    flex-direction: column;
+}
+
+/* === ОСНОВНОЙ КОНТЕНТ === */
+main {
+    flex: 1 0 auto; /* Растягивается, прижимая подвал вниз */
+    display: flex;
+    align-items: center; /* Центрируем блок по вертикали */
+    justify-content: center; /* Центрируем блок по горизонтали */
+    padding: 20px;
+    width: 100%;
+}
+
+.about-section {
+    max-width: 900px;
+    width: 100%;
+    background-color: white;
+    padding: 50px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 40, 0, 0.1);
+}
+
+/* === ЗАГОЛОВКИ === */
+h1 {
+    font-size: 42px;
+    color: #2d5e2c;
+    margin-bottom: 30px;
+    font-weight: 700;
+    border-bottom: 4px solid #9bc184;
+    padding-bottom: 15px;
+    position: relative;
+    text-align: center;
+}
+
+/* === ТЕКСТ === */
+p {
+    font-size: 18px;
+    margin-bottom: 20px;
+    color: #2c3e2f;
+    line-height: 1.8;
+    text-align: center;
+}
+
+/* === ПОДВАЛ === */
+.footer {
+    background-color: #576035;
+    text-align: center;
+    padding: 20px;
+    width: 100%;
+    flex-shrink: 0; /* Запрещаем сжиматься */
+}
+
+.footer p {
+    margin: 0;
+    color: white;
+    font-size: 16px;
+}
+
