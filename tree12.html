@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="Favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="tree_template.css">
+    <title>Клён</title>
+</head>
+<body>
+    <main>
+        <section class="game-screen">
+            <img src="klen.jpg" alt="Клён" width="500"  style="margin-left: 100px; margin-top: 0px;">
+            <img src="list_klen.jpg" alt="Ветвь клёна" class="tree-image-right" width="500">
+            <img src="people.png" alt="Игрок" width="130" style="position: relative; top: -80px; left: -200px;">
+
+            <div class="game-bar">
+
+                <div class="dialog-text" id="dialogText">
+                    Вот и настало время встречи, предсказанное духом. Здравствуй, мой юный слушатель. Позволь поведать о виде моём.
+                </div>
+
+                <!-- КНОПКА (добавлена) -->
+                <a href="for_kid_3.html" class="follow-button" id="followButton">
+                    Вернуться назад →
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        const allPhrases = [
+            "Вот и настало время встречи, предсказанное духом. Здравствуй, мой юный слушатель. Позволь поведать о виде моём.",
+            ".........",
+            "...............",
+            "А, ой, вы ответа ждёте? Здравствуйте, конечно! Мне очень интересно, внимательно слушаю вас.",
+            "Имя мне — Клён остролистный. Следы моих сестёр и братьев простираются от Северного Кавказа до южных границ таёжной зоны. Растём мы быстро, живём до 150–200 лет. Почва нам нужна плодородная да влажная.",
+            "Важны мы для пчеловодов — пыльценосным и медоносным деревом нас нарекают. Только пчёлкам с нами тяжеловато. Пчёлы-то, знай, силу набирают к лету, а я зацветаю, когда весна ещё плечами ёжится. Через 20–30 дней после ольхи да лещины распускаю свои желтовато‑зелёные щитковидные соцветия — а семьи пчелиные к тому часу ещё не окрепли как следует. Да и погода, ох, коварна бывает: я цвету при 12–13 ℃, а если вдруг холод да дождь — нектар мой прячется, пчёлам не до сбора.",
+            "Древесина наша ценится в токарном деле — гладкая да прочная, годится для изящных поделок и добротной мебели. Немало пользы и в парках — раскидистая крона даёт щедрую тень, украшает аллеи. Да и горючий материал из нас ценный — жарко горит, тепло дарит.",
+            "Вроде ничего я не забыл, о чём хотел — о том и поведал. А если и забыл, значит, так предначертано, чтобы позже это узналось.",
+            "Дитя, слышу — зовёт меня дух лесной. Магия — не вечна… Рад был повидаться с тобой."
+
+        ];
+
+        const speakers = [
+            "дерево","игрок", "игрок", "игрок","дерево", "дерево", "дерево", "дерево", "дерево"
+        ];
+
+        let currentIndex = 0;
+        const dialogText = document.getElementById('dialogText');
+        const followButton = document.getElementById('followButton');
+
+
+
+        function showNextPhrase() {
+            if (currentIndex < allPhrases.length - 1) {
+                currentIndex++;
+                dialogText.textContent = allPhrases[currentIndex];
+
+                if (speakers[currentIndex] === "дерево") {
+                    dialogText.classList.remove('player-text');
+                } else {
+                    dialogText.classList.add('player-text');
+                }
+            }
+
+            if (currentIndex === allPhrases.length - 1) {
+                followButton.style.display = 'inline-block';
+            }
+        }
+
+        dialogText.addEventListener('click', showNextPhrase);
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') showNextPhrase();
+        });
+    </script>
+</body>
+</html>

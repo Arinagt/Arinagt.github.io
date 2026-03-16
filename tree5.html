@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="Favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="tree_template5.css">
+    <title>???</title>
+</head>
+<body>
+    <main>
+        <section class="game-screen">
+            <!-- Видео на весь экран -->
+            <video class="bg-video" autoplay muted playsinline disablePictureInPicture>
+                <source src="bereza.mp4" type="video/mp4">
+            </video>
+
+            <div class="game-bar">
+                <div class="dialog-text" id="dialogText">
+                    <!-- Здесь будет динамический текст -->
+                </div>
+
+                <!-- КНОПКА -->
+                <a href="for_kid_3.html" class="follow-button" id="followButton">
+                    Вернуться назад →
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Массив с фразами
+        const allPhrases = [
+            "Здрасте...",
+            "Ау? .... Здравствуйте?",
+            "Вы меня слышите?",
+            "Здесь кто-нибудь есть?",
+            "Ау-у-у",
+            "........",
+            "вверх",
+            "вверх",
+            "вверх",
+            "вверх",
+            "ВВЕРХ",
+            "Привет! Ты вероятно тот человечек, про которого берёзе говорил дух? Ну временно берёзы нет, но затоооо есть я! А кто я тебе знать не обязательно. Ты кстати уже видел(а) на главной странице сайта вкладку \"Лесной дозор\"? Не смотрел(а) что там? Посмотрииииии))) Но сначала!!!! Вот тебе тебе 1 часть ключа: \"лесной\". И помни! Реальность — иллюзия, вселенная — голограмма, скупай золото, пока!"
+        ];
+
+        // Кто говорит (игрок или ???)
+        const speakers = [
+            "игрок",   // фраза 0
+            "игрок",   // фраза 1
+            "игрок",   // фраза 2
+            "игрок",   // фраза 3
+            "игрок",   // фраза 4
+            "игрок",   // фраза 5
+            "unknown", // фраза 6
+            "unknown", // фраза 7
+            "unknown", // фраза 8
+            "unknown", // фраза 9
+            "unknown", // фраза 10
+            "unknown"  // фраза 11
+        ];
+
+        // Стили для разных фраз unknown
+        const unknownStyles = [
+            "unknown-tiny",    // фраза 6
+            "unknown-small",   // фраза 7
+            "unknown-medium",  // фраза 8
+            "unknown-norm",  // фраза 9
+            "unknown-red",     // фраза 10
+            "unknown-normal"   // фраза 11
+        ];
+
+        // Временные настройки (в миллисекундах)
+        const TIME_SETTINGS = {
+            UNKNOWN_START_DELAY: 40000,     // 38 секунд до первой фразы unknown
+            UNKNOWN_PHRASE_INTERVAL: 7500,   // 5 секунд между фразами 6-10
+            FINAL_PHRASE_DELAY: 11000        // 7 секунд после 10-й фразы до 11-й
+        };
+
+        let currentIndex = 0;
+        let autoTimeout = null;
+        let isAutoPlaying = false;
+        let unknownStartTimeout = null;
+        let finalPhraseTimeout = null; // Таймер для последней фразы
+        let unknownStarted = false;     // Флаг: начались ли уже фразы unknown
+
+        const dialogText = document.getElementById('dialogText');
+        const followButton = document.getElementById('followButton');
+
+        // Функция обновления текста и стиля
+        function updateDialog(index) {
+            if (index < allPhrases.length) {
+                // Просто текст, без HTML
+                dialogText.textContent = allPhrases[index];
+
+                // Удаляем все классы
+                dialogText.className = 'dialog-text';
+
+                // Добавляем класс в зависимости от говорящего
+                if (speakers[index] === "игрок") {
+                    dialogText.classList.add('player-text');
+                } else {
+                    dialogText.classList.add('unknown-text');
+                    // Добавляем специальный стиль для unknown
+                    if (index >= 6 && index <= 11) {
+                        dialogText.classList.add(unknownStyles[index - 6]);
+                    }
+                }
+
+                // Проверка на последнюю фразу
+                if (index === allPhrases.length - 1) {
+                    followButton.style.display = 'inline-block';
+                    if (autoTimeout) {
+                        clearTimeout(autoTimeout);
+                        autoTimeout = null;
+                        isAutoPlaying = false;
+                    }
+                    if (finalPhraseTimeout) {
+                        clearTimeout(finalPhraseTimeout);
+                        finalPhraseTimeout = null;
+                    }
+                }
+            }
+        }
+
+        // Функция для показа финальной фразы (индекс 11)
+        function showFinalPhrase() {
+            if (currentIndex < 11) {
+                currentIndex = 11;
+                updateDialog(11);
+            }
+        }
+
+        // Функция для показа следующей фразы unknown
+        function showNextUnknown() {
+            if (!unknownStarted) return;
+
+            if (currentIndex < 10) {
+                currentIndex++;
+                updateDialog(currentIndex);
+
+                if (currentIndex === 10) {
+                    // Показали красную ВВЕРХ, запускаем таймер на 11-ю
+                    finalPhraseTimeout = setTimeout(showFinalPhrase, TIME_SETTINGS.FINAL_PHRASE_DELAY);
+                } else if (currentIndex < 10) {
+                    // Продолжаем цепочку unknown фраз
+                    autoTimeout = setTimeout(showNextUnknown, TIME_SETTINGS.UNKNOWN_PHRASE_INTERVAL);
+                }
+            }
+        }
+
+        // Функция для запуска первой фразы неизвестного
+        function startUnknown() {
+            if (unknownStarted) return;
+
+            unknownStarted = true;
+
+            // Очищаем все таймеры
+            if (autoTimeout) clearTimeout(autoTimeout);
+            if (finalPhraseTimeout) clearTimeout(finalPhraseTimeout);
+
+            // Если мы еще на фразах игрока (индекс <=5), переключаем на первую unknown
+            if (currentIndex <= 5) {
+                currentIndex = 6;
+                updateDialog(6);
+
+                // Запускаем цепочку unknown фраз
+                autoTimeout = setTimeout(showNextUnknown, TIME_SETTINGS.UNKNOWN_PHRASE_INTERVAL);
+            }
+            // Если мы уже на unknown фразах, ничего не делаем
+        }
+
+        // Функция для ручного переключения (только для диалогов игрока)
+        function manualNext() {
+            // Можно переключать только если:
+            // 1. Не начались еще фразы unknown
+            // 2. Мы на фразах игрока (индекс < 6)
+            if (!unknownStarted && currentIndex < 5) {
+                const nextSpeaker = speakers[currentIndex + 1];
+
+                if (nextSpeaker === "игрок") {
+                    currentIndex++;
+                    updateDialog(currentIndex);
+                }
+            }
+        }
+
+        // Функция для инициализации диалогов
+        function initializeDialog() {
+            currentIndex = 0;
+            updateDialog(0);
+
+            // Запускаем таймер на 38 секунд для начала фраз unknown
+            // Этот таймер сработает независимо от действий игрока
+            unknownStartTimeout = setTimeout(startUnknown, TIME_SETTINGS.UNKNOWN_START_DELAY);
+        }
+
+        // Обработчики событий
+        dialogText.addEventListener('click', manualNext);
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') manualNext();
+        });
+
+        // Блокировка перезапуска видео
+        const video = document.querySelector('.bg-video');
+        if (video) {
+            video.addEventListener('ended', function() {
+                video.controls = false;
+            });
+        }
+
+        // Запускаем диалоги
+        initializeDialog();
+    </script>
+</body>
+</html>

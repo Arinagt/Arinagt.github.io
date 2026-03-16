@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="Favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="tree_template.css">
+    <title>Граб</title>
+</head>
+<body>
+    <main>
+        <section class="game-screen">
+            <img src="grab.png" alt="Граб" width="550"  style="margin-left: 100px; margin-top: 50px;">
+            <img src="list_grab.png" alt="Ветвь граба" class="tree-image-right" width="600" >
+            <img src="people.png" alt="Игрок" width="150" style="position: relative; top: -80px; left: -450px; transform: scaleX(-1);">
+
+            <div class="game-bar">
+
+                <div class="dialog-text" id="dialogText">
+                    Здравствуй, человек. Дух попросил представиться. Звать меня Граб обыкновенный.
+                </div>
+
+                <!-- КНОПКА (добавлена) -->
+                <a href="for_kid_3.html" class="follow-button" id="followButton">
+                    Вернуться назад →
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        const allPhrases = [
+            "Здравствуй, человек. Дух попросил представиться. Звать меня Граб обыкновенный.",
+            "Расту на территории Европы, Малой Азии, Кавказа, КЧР в частности, Закавказья, Иранского нагорья. Люблю тепло и солнце. Тень тоже выношу. Холода и зиму не жалую.",
+            "Встретить чистые грабовые леса большая удача, обычно расту с дубом и/или буком. Расту медленно и не сильно высоко - от 15 до 25 метров. Крона густая. Живу до 200 лет, хотя бывают исключения и доживают собратья до 300 лет. ",
+            "Вопросы остались?",
+            " Н-нет...... ",
+            "Отлично, тогда я....",
+            "Хотя,постой! А где используют вашу древесину?",
+            "Из неё делают инструменты музыкальные, рукоятки, поделки. Мой вид - отличное декоративное дерево, нами парки украшают. Ещё.. Так, ладно, пять минут вышло, мне пора. Прощай человек.",
+            "Надо же какое занятое дерево."
+
+        ];
+
+        const speakers = [
+            "дерево","дерево","дерево","дерево","игрок","дерево","игрок","дерево","игрок"
+        ];
+
+        let currentIndex = 0;
+        const dialogText = document.getElementById('dialogText');
+        const followButton = document.getElementById('followButton');
+
+
+
+        function showNextPhrase() {
+            if (currentIndex < allPhrases.length - 1) {
+                currentIndex++;
+                dialogText.textContent = allPhrases[currentIndex];
+
+                if (speakers[currentIndex] === "дерево") {
+                    dialogText.classList.remove('player-text');
+                } else {
+                    dialogText.classList.add('player-text');
+                }
+            }
+
+            if (currentIndex === allPhrases.length - 1) {
+                followButton.style.display = 'inline-block';
+            }
+        }
+
+        dialogText.addEventListener('click', showNextPhrase);
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') showNextPhrase();
+        });
+    </script>
+</body>
+</html>

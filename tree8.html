@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="Favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="tree_template.css">
+    <title>Чинар</title>
+</head>
+<body>
+    <main>
+        <section class="game-screen">
+            <img src="byk.png" alt="Чинар" width="1000" style="margin-left: 100px";>
+            <img src="chinarik.png" alt="Ветвь чинара" class="tree-image-right" width="600px" style="margin-right: 50px">
+            <img src="people.png" alt="Игрок" width="150" style="margin-left: -550px";>
+
+            <div class="game-bar">
+
+                <div class="dialog-text" id="dialogText">
+                    Здравствуйте, Чинар! Это на вас чинарики растут?
+                </div>
+
+                <!-- КНОПКА (добавлена) -->
+                <a href="for_kid_3.html" class="follow-button" id="followButton">
+                    Вернуться назад →
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        const allPhrases = [
+            "Здравствуйте, Чинар! Это на вас чинарики растут?",
+            "Здравствуй, здравствуй! На мне, только не Чинар я — имя мне Бук восточный. Ты не первый, кто ошибается.",
+            "Стоп-стоп-стоп, простите? А почему? Все вас называют чинар или чинара, и на вас растут чинарики… В чём подвох?",
+            "Чинар, дитя, — это платан восточный. Он в России южнее растёт: на Черноморском побережье Кавказа, в Крыму. А я — бук восточный, один из видов бука в России. Расту на Кавказе, ну и в КЧР, собственно. А «чинарой» меня зовут по ошибке — может, название понравилось, а может, ещё что, но им я не являюсь. Кстати, орешки на мне — тоже не чинарики, а буковые орешки, но все их зовут «чинариками», и я не обижаюсь.",
+            "Вот как… Какая запутанная история имени одного дерева!",
+            "Ничего, я не обидчив — уже привык к своему второму имени.",
+            "Слушайте, Чин… Бук восточный, а кроме вкусных чинариков вас ещё для чего-то выращивают?",
+            "Конечно! Из моей древесины делают мебель, паркет, шпалы — после специальной обработки, разумеется. Кстати, дитя: никогда не ешь необжаренные «чинарики» — они ядовитые!"
+        ];
+
+        const speakers = [
+            "игрок","дерево","игрок", "дерево", "игрок","дерево", "игрок","дерево"
+        ];
+
+        let currentIndex = 0;
+        const dialogText = document.getElementById('dialogText');
+        const followButton = document.getElementById('followButton');
+
+        dialogText.classList.add('player-text');
+
+        function showNextPhrase() {
+            if (currentIndex < allPhrases.length - 1) {
+                currentIndex++;
+                dialogText.textContent = allPhrases[currentIndex];
+
+                if (speakers[currentIndex] === "дерево") {
+                    dialogText.classList.remove('player-text');
+                } else {
+                    dialogText.classList.add('player-text');
+                }
+            }
+
+            if (currentIndex === allPhrases.length - 1) {
+                followButton.style.display = 'inline-block';
+            }
+        }
+
+        dialogText.addEventListener('click', showNextPhrase);
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') showNextPhrase();
+        });
+    </script>
+</body>
+</html>

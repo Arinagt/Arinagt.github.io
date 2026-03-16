@@ -1,0 +1,142 @@
+/* === СБРОС ОТСТУПОВ === */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+/* === ШАПКА === */
+.header {
+    height: 70px;
+    background-color: #f0e0cd;
+    display: flex;
+    align-items: center;
+    padding: 0 50px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+}
+
+.logo {
+    width: 80px;
+    height: auto;
+}
+
+.main_nav {
+    margin-left: auto;
+    margin-right: 100px;
+}
+
+.main_nav ul {
+    display: flex;
+    list-style: none;
+    gap: 100px;
+}
+
+.main_nav a {
+    color: #434e3d;
+    text-decoration: none;
+    font-size: 25px;
+    font-weight: bold;
+    font-family: 'Comic Sans MS';
+}
+
+/* === ОСНОВНОЙ КОНТЕНТ === */
+main {
+    margin-top: 70px;
+}
+
+/* === ПЕРВЫЙ БЛОК === */
+.hero-block {
+    width: 100%;
+    height: calc(100vh - 70px);
+    background-image: url('vid.jpg');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+/* Общее затемнение */
+.hero-block::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 1;
+}
+
+/* Затемнение слева */
+.hero-block::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
+    z-index: 2;
+    pointer-events: none;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 3;
+    max-width: 800px;
+    margin-left: 5%;
+    color: white;
+}
+
+.hero-content h1 {
+    font-size: 64px;
+    font-family: 'Comic Sans MS';
+    margin-bottom: 20px;
+}
+
+.hero-content p {
+    font-size: 24px;
+    font-family: 'Comic Sans MS';
+    line-height: 1.6;
+    margin-bottom: 40px;  /* Отступ перед кнопкой */
+}
+
+/* === КНОПКА (стиль для кнопки в первом блоке) === */
+.hero-button {
+    display: inline-block;
+    background-color: #99a03e;
+    color: white;
+    text-decoration: none;
+    padding: 20px 50px;
+    font-size: 28px;
+    font-family: 'Comic Sans MS';
+    font-weight: bold;
+    border-radius: 60px;
+    border: 3px solid white;
+    transition: 0.3s;
+}
+
+.hero-button:hover {
+    background-color: #36461e;
+    transform: scale(1.05);
+}
+/* === ПРОСТОЙ ПОДВАЛ === */
+.footer {
+    background-color: #576035;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    font-family: 'Comic Sans MS';
+    font-size: 18px;
+}

@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="Favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="tree_template.css">
+    <title>Пихта</title>
+</head>
+<body>
+    <main>
+        <section class="game-screen">
+            <img src="pixta.png" alt="Пихта" width="700" style="margin-left: 100px";>
+            <img src="vetca_pixti.jpg" alt="Ветвь пихты" class="tree-image-right">
+            <img src="people.png" alt="Игрок" width="120" style="margin-left: -200px";>
+
+            <div class="game-bar">
+
+                <div class="dialog-text" id="dialogText">
+                    Приветствую тебя! Дух рассказал мне о твоей тяге к знаниям о лесах КЧР, и я — пихта Нордмана (кавказская пихта) — расскажу тебе о своём виде. Живём мы и на лёгких возвышенностях от 600 метров, и на высоких отвесных скалах — вплоть до 2200 метров. Лишь бы тепло было — морозы я не сильно жалую.
+                </div>
+
+                <!-- КНОПКА (добавлена) -->
+                <a href="for_kid_3.html" class="follow-button" id="followButton">
+                    Вернуться назад →
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        const allPhrases = [
+            "Приветствую тебя! Дух рассказал мне о твоей тяге к знаниям о лесах КЧР, и я — пихта Нордмана (кавказская пихта) — расскажу тебе о своём виде. Живём мы и на лёгких возвышенностях от 600 метров, и на высоких отвесных скалах — вплоть до 2200 метров. Лишь бы тепло было — морозы я не сильно жалую.",
+            "А в КЧР ты где растёшь? У нас бывает довольно холодно в Домбае и Теберде.",
+            "В Архызском участковом лесничестве — там я вместе с братьями и сёстрами формирую природный каркас. И ещё в Тебердинском заповеднике, на крутом склоне у речки Кизгич.",
+            "И в заповеднике растёшь… А что ещё расскажешь?",
+            "Ты знал(а), что из моей древесины делают музыкальные инструменты и бумагу? Моё дерево высоко ценится в авиастроении, а также в нашей республике в 2016 году я была главным новогодним символом.\n",
+            "Пихта, не ель? Как здорово! А расскажи, что ещё из тебя делают.",
+            "Конечно! Ещё я нужна в…",
+            "Ну вот, магия духа иссякла — даже договорить не успела.",
+
+
+        ];
+
+        const speakers = [
+            "дерево","игрок", "дерево", "игрок", "дерево", "игрок","дерево", "игрок"
+        ];
+
+        let currentIndex = 0;
+        const dialogText = document.getElementById('dialogText');
+        const followButton = document.getElementById('followButton');
+
+
+
+        function showNextPhrase() {
+            if (currentIndex < allPhrases.length - 1) {
+                currentIndex++;
+                dialogText.textContent = allPhrases[currentIndex];
+
+                if (speakers[currentIndex] === "дерево") {
+                    dialogText.classList.remove('player-text');
+                } else {
+                    dialogText.classList.add('player-text');
+                }
+            }
+
+            if (currentIndex === allPhrases.length - 1) {
+                followButton.style.display = 'inline-block';
+            }
+        }
+
+        dialogText.addEventListener('click', showNextPhrase);
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') showNextPhrase();
+        });
+    </script>
+</body>
+</html>

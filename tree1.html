@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="Favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="tree_template.css">
+    <title>Ягодный тис</title>
+</head>
+<body>
+    <main>
+        <section class="game-screen">
+            <img src="tis.png" alt="Ягодный тис" width="500" style="margin-left: 100px";>
+            <img src="iahoda.jpg" alt="Ягодный тис" class="tree-image-right">
+            <img src="people.png" alt="Игрок" width="150" style="margin-left: -100px";>
+
+            <div class="game-bar">
+
+                <div class="dialog-text" id="dialogText">
+                    Гой еси, чадо. Дух лесной упросил меня поведать тебе о виде моём. Учёный люд нарёк меня именем Taxus baccata, но все величают меня Тис Ягодный.
+                </div>
+
+                <!-- КНОПКА (добавлена) -->
+                <a href="for_kid_3.html" class="follow-button" id="followButton">
+                    Вернуться назад →
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        const allPhrases = [
+            "Гой еси, чадо. Дух лесной упросил меня поведать тебе о виде моём. Учёный люд нарёк меня именем Taxus baccata, но все величают меня Тис Ягодный.",
+            "Почему ты так разговариваешь?",
+            "Да как научен, так и звучен. Не первое тысячелетие живу, чадо, да ещё и молод я. Вон, братья мои из земель соседских, именуемых «Кавказским заповедником», уже более двух тысяч лет живут.",
+            "Две тысячи лет… И не скучно? Ты только тут растёшь?",
+            "Нет, мои братья и сёстры растут в Европе — вплоть до северных земель страны скандинавов, величаемой Норвегией, а на юг уходим корнями вплоть до Африки и Ирана…",
+            "Погоди, раз тебе больше тысячи лет, почему ты такой небольшой? Всего-то около 15 метров",
+            "Таков удел наш, чадо. Медленно и верно сквозь столетия расти.",
+            "И неужели за это время никто не попытался тебя срубить? Как ты вообще столько-то прожил?",
+            "Пытались, конечно, да так пытались, что мало осталось нас на земле. Люди спохватились, перстом в своих скрижалях указали: «Не тронь!» Оберегают нынче, а раньше токсичность моя главной охраной мне была.",
+            "Так ты ядовитый? А я не отравлюсь?",
+            "Не бойся, чадо, здесь я не опасен. А так… Как вспомню… Бывало, нарубят молодцы неразумные дров на растопку, а после и не просыпаются. Суровый урок, но верный. Весь я — от корней до иголок — ядовит, кроме ариллуса, ягодок красных.",
+            "Бррр… Хорошо, что воображении встретились, не хочу быть отравленным. Какое же ты интересное дерево, Тис Ягодный!",
+            "Каким уж уродился. Ну, дивное чадо, к горести моей, не вечен я в мире твоём, сотканном из мыслей…"
+        ];
+
+        const speakers = [
+            "тис","игрок", "тис", "игрок", "тис", "игрок","тис", "игрок", "тис", "игрок", "тис", "игрок", "тис"
+        ];
+
+        let currentIndex = 0;
+        const dialogText = document.getElementById('dialogText');
+        const followButton = document.getElementById('followButton');
+
+
+
+        function showNextPhrase() {
+            if (currentIndex < allPhrases.length - 1) {
+                currentIndex++;
+                dialogText.textContent = allPhrases[currentIndex];
+
+                if (speakers[currentIndex] === "тис") {
+                    dialogText.classList.remove('player-text');
+                } else {
+                    dialogText.classList.add('player-text');
+                }
+            }
+
+            if (currentIndex === allPhrases.length - 1) {
+                followButton.style.display = 'inline-block';
+            }
+        }
+
+        dialogText.addEventListener('click', showNextPhrase);
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') showNextPhrase();
+        });
+    </script>
+</body>
+</html>

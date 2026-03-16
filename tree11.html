@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="Favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="tree_template.css">
+    <title>Ясень</title>
+</head>
+<body>
+    <main>
+        <section class="game-screen">
+            <img src="asen.png" alt="Ясень" width="500"  style="margin-left: 100px; margin-top: 100px;">
+            <img src="vetka_asen.png" alt="Ветвь ясеня" class="tree-image-right" width="700">
+            <img src="people.png" alt="Игрок" width="150" style="position: relative; top: 0px; left: -200px;">
+
+            <div class="game-bar">
+
+                <div class="dialog-text" id="dialogText">
+                    Какой сегодня чудесный день, не находишь? Самое время представиться! А дух не хотел меня к тебе отправлять, а зря — вон ты какой славный ребёнок. Ну что, знаешь ли ты обо мне хоть что-нибудь?
+                </div>
+
+                <!-- КНОПКА (добавлена) -->
+                <a href="for_kid_3.html" class="follow-button" id="followButton">
+                    Вернуться назад →
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        const allPhrases = [
+            "Какой сегодня чудесный день, не находишь? Самое время представиться! А дух не хотел меня к тебе отправлять, а зря — вон ты какой славный ребёнок. Ну что, знаешь ли ты обо мне хоть что-нибудь?",
+            "Эм… Вас вроде Ясень зовут… Ещё… Ну… Эм…",
+            "Ничего постыдного в незнании нет, я же здесь и всё тебе расскажу. ",
+            "Зовут меня Ясень обыкновенный. Расту я в европейской части нашей чудесной страны и на Северном Кавказе. А мой братец, Ясень маньчжурский, обитает на Дальнем Востоке и в Восточной Азии.",
+            "В общем, расту почти везде, где солнечно, почва не переувлажнена, не засолена и не слишком сухая. Кислотность тоже важна: люблю нейтральную землю, а сильно кислую или щелочную не переношу. Мне всего-то и нужно — плодородная нейтральная почва да солнечные места. Как мало, согласись?",
+            "Очень мало… А что ещё расскажете?",
+            "Древесина у меня ценная. У нас в стране даже за границу необработанную мою древесину вывозить нельзя. Живу я до трёхсот лет — представляешь, какой долгожитель? Да и высокий к тому же: под тридцать метров могу вырасти. А в остальном я скромное и просто очаровательное дерево. Буду рад ответить на любые твои вопросы.",
+            "Да вы и так уже всё рассказали…",
+            "Какая жалость… Ну ничего, как появятся вопросы — приходи, не…",
+            "Чары рассеялись."
+
+        ];
+
+        const speakers = [
+            "дерево","игрок", "дерево", "дерево", "дерево", "игрок", "дерево", "игрок","дерево" ,"игрок"
+        ];
+
+        let currentIndex = 0;
+        const dialogText = document.getElementById('dialogText');
+        const followButton = document.getElementById('followButton');
+
+
+
+        function showNextPhrase() {
+            if (currentIndex < allPhrases.length - 1) {
+                currentIndex++;
+                dialogText.textContent = allPhrases[currentIndex];
+
+                if (speakers[currentIndex] === "дерево") {
+                    dialogText.classList.remove('player-text');
+                } else {
+                    dialogText.classList.add('player-text');
+                }
+            }
+
+            if (currentIndex === allPhrases.length - 1) {
+                followButton.style.display = 'inline-block';
+            }
+        }
+
+        dialogText.addEventListener('click', showNextPhrase);
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') showNextPhrase();
+        });
+    </script>
+</body>
+</html>

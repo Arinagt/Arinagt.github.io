@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="Favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="tree_template.css">
+    <title>Сосна</title>
+</head>
+<body>
+    <main>
+        <section class="game-screen">
+            <img src="sosna.png" alt="Сосна" width="500" style="margin-left: 100px";>
+            <img src="vetka_sosny.png" alt="Ветвь сосны" class="tree-image-right">
+            <img src="people.png" alt="Игрок" width="150" style="margin-left: -100px";>
+
+            <div class="game-bar">
+
+                <div class="dialog-text" id="dialogText">
+                    Здравствуй, юный друг. Я Pinus sylvestris — или, как говорят в народе, сосна обыкновенная. Можешь звать меня просто Сосной.
+                </div>
+
+                <!-- КНОПКА (добавлена) -->
+                <a href="for_kid_3.html" class="follow-button" id="followButton">
+                    Вернуться назад →
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        const allPhrases = [
+            "Здравствуй, юный друг. Я Pinus sylvestris — или, как говорят в народе, сосна обыкновенная. Можешь звать меня просто Сосной.",
+            "А что, бывают необыкновенные?",
+            "Нас, сосен, около ста тридцати видов, и какая-нибудь диковинка найдётся у каждой. А обыкновенной меня нарекли вовсе не потому, что я серая и неприметная — я очень даже примечательная! Просто я — вид самый распространённый, чтобы с сёстрами не путали, так и назвали. Я, знаешь ли, лесообразующая порода — в лесном хозяйстве без меня никуда!",
+            "Ого! Самый распространённый вид? А где именно ты обитаешь?",
+            "О‑о, мой дом огромен: от Испании с Великобританией на западе до самой реки Амур в Восточной Сибири. На севере заберусь аж до Лапландии, а на юге можно встретить моих сестричек в Монголии и Китае.",
+            "Ничего себе расстояние! И как ты умудряешься выживать везде? Ведь на севере — холод, на юге — жара, где‑то болота, где‑то сушь…",
+            "А всё потому, что я к среде крайне неприхотлива. Подумаешь, −60 ℃ или +40 ℃ — для меня дело житейское! Хоть на болоте, хоть на голой скале приживусь — был бы только уголок по душе. У меня, видишь ли, корни могучие: вглубь уходят, воду достают даже из скудных почв. А хвоинки покрыты восковым налётом — он бережёт влагу в засуху.",
+            "Вау! То есть ты как супергерой среди деревьев?",
+            "Ха-ха, можно и так сказать! И живу я так, без забот, лет двести, а то и двести пятьдесят. Вон в Архызе подружка моя живёт — её аж на звание «Дерево России 2025» номинировали. Представь, сколько историй она могла бы рассказать!",
+            "Круто, а я и не знал(а)! Расскажи ещё что‑нибудь — ну пожалуйста!",
+            "Увы, юный друг, чары духа не вечны. Но если захочешь узнать обо мне больше — загляни в книги. Там найдёшь немало удивительных историй!"
+
+        ];
+
+        const speakers = [
+            "дерево","игрок", "дерево", "игрок", "дерево", "игрок","дерево", "игрок", "дерево", "игрок", "дерево"
+        ];
+
+        let currentIndex = 0;
+        const dialogText = document.getElementById('dialogText');
+        const followButton = document.getElementById('followButton');
+
+
+
+        function showNextPhrase() {
+            if (currentIndex < allPhrases.length - 1) {
+                currentIndex++;
+                dialogText.textContent = allPhrases[currentIndex];
+
+                if (speakers[currentIndex] === "дерево") {
+                    dialogText.classList.remove('player-text');
+                } else {
+                    dialogText.classList.add('player-text');
+                }
+            }
+
+            if (currentIndex === allPhrases.length - 1) {
+                followButton.style.display = 'inline-block';
+            }
+        }
+
+        dialogText.addEventListener('click', showNextPhrase);
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') showNextPhrase();
+        });
+    </script>
+</body>
+</html>

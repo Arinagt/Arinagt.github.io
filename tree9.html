@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="Favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="tree_template.css">
+    <title>Дуб</title>
+</head>
+<body>
+    <main>
+        <section class="game-screen">
+            <img src="big_ouk.png" alt="Дуб" width="900"  style="margin-left: 100px; margin-top: 100px;">
+            <img src="ouk.png" alt="Ветвь дуба" class="tree-image-right" width="600">
+            <img src="people.png" alt="Игрок" width="150" style="position: relative; top: -80px; left: -400px;">
+
+            <div class="game-bar">
+
+                <div class="dialog-text" id="dialogText">
+                    Добрый, добрый день, мой юный гость! Я — черешчатый дуб, живу тут около 250 лет.
+                </div>
+
+                <!-- КНОПКА (добавлена) -->
+                <a href="for_kid_3.html" class="follow-button" id="followButton">
+                    Вернуться назад →
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        const allPhrases = [
+            "Добрый, добрый день, мой юный гость! Я — черешчатый дуб, живу тут около 250 лет.",
+            "А вы тут один живёте или ещё есть виды дубов?",
+            "Нет, что ты! Одному скучно на пенсии жить. Тут мои братья растут по всей КЧР: скальный дуб, пушистый дуб и дуб Гартвиса. У кого крона пошире, у кого корни мощнее — все разные!",
+            "Так много видов дубов! А как же их отличить-то?",
+            "О, это просто, дитя! Я, черешчатый, люблю почвы помягче — супесчаные, суглинистые, подзолистые да чернозёмы. ",
+            "Брат мой, скальный дуб, — тот настоящий скалолаз! Назван так неспроста: ему хоть голые скалы подавай, неприхотлив во всём. Младший братец, пушистый дуб, предпочитает сухие, каменистые склоны да почвы, богатые известью. ",
+            "А дуб Гартвиса… тот особенный. Его в Красную книгу КЧР внесли, берегут. В Карачаевском районе целая роща его растёт — загляденье!",
+            "Ни разу не видел дуб Гартвиса… Наверное, он очень красивый!",
+            "И не говори, дитя. Да только магия духа слабеет… пришло время нам расстаться."
+
+        ];
+
+        const speakers = [
+            "дерево","игрок", "дерево", "игрок", "дерево", "дерево", "дерево","игрок","дерево"
+        ];
+
+        let currentIndex = 0;
+        const dialogText = document.getElementById('dialogText');
+        const followButton = document.getElementById('followButton');
+
+
+
+        function showNextPhrase() {
+            if (currentIndex < allPhrases.length - 1) {
+                currentIndex++;
+                dialogText.textContent = allPhrases[currentIndex];
+
+                if (speakers[currentIndex] === "дерево") {
+                    dialogText.classList.remove('player-text');
+                } else {
+                    dialogText.classList.add('player-text');
+                }
+            }
+
+            if (currentIndex === allPhrases.length - 1) {
+                followButton.style.display = 'inline-block';
+            }
+        }
+
+        dialogText.addEventListener('click', showNextPhrase);
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') showNextPhrase();
+        });
+    </script>
+</body>
+</html>

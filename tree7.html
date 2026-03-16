@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="Favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="tree_template.css">
+    <title>Тополь</title>
+</head>
+<body>
+    <main>
+        <section class="game-screen">
+            <img src="topol.png" alt="Тополь" width="300" style="margin-left: 100px";>
+            <img src="list_topol.png" alt="Ветвь тополя" class="tree-image-right" style="margin-right: 50px">
+            <img src="people.png" alt="Игрок" width="120" style="margin-left: -100px";>
+
+            <div class="game-bar">
+
+                <div class="dialog-text" id="dialogText">
+                    Здравствуйте, а как вас величать?
+                </div>
+
+                <!-- КНОПКА (добавлена) -->
+                <a href="for_kid_3.html" class="follow-button" id="followButton">
+                    Вернуться назад →
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        const allPhrases = [
+            "Здравствуйте, а как вас величать?",
+            "Повтори-ка погромче, дитя, я тебя не расслышал.",
+            "ЗВАТЬ ВАС КАК?",
+            "Чёрный Тополь я, Осокорь зовут.",
+            "А знаете, как называется тополь размером с пятнадцатиэтажку? Я по телевизору видел, а название и где растёт — не запомнил. Ему около 60 лет.",
+            "А вам сколько? И вроде вы ниже его — до скольки вообще вырастаете?",
+            "Не припомню, чтобы у нас в республике такие тополя росли. Скорее всего, это тополя из Америки — обычно там такие высокие растут. Может, это тополь волосистоплодный, а может, западный бальзамический — поди их разбери. А наш рост ограничен до 35 метров. Ты, вроде, что‑то ещё спрашивал? Я не расслышал…",
+            "Возраст! Ваш возраст!",
+            "Мне в районе 70. А так живём мы до 100 лет, бывало, и до 300 доживали.",
+            "А какие ещё виды тополей растут в КЧР?",
+            "В городе растут пирамидальные тополя — красоту наводят. А ещё совсем недавно, в 2025 году, посадили клонов легендарного сталинградского тополя Победы на территории мемориального комплекса «Музей‑памятник защитникам перевалов Кавказа».",
+            "Здорово. Только кричать-то не очень здорово…",
+            "Что говоришь?",
+            "До свидания, господин Осокорь. Пойду я."
+
+
+        ];
+
+        const speakers = [
+            "игрок","дерево","игрок", "дерево", "игрок", "игрок","дерево", "игрок","дерево","игрок","дерево", "игрок", "дерево", "игрок"
+        ];
+
+        let currentIndex = 0;
+        const dialogText = document.getElementById('dialogText');
+        const followButton = document.getElementById('followButton');
+
+        dialogText.classList.add('player-text');
+
+        function showNextPhrase() {
+            if (currentIndex < allPhrases.length - 1) {
+                currentIndex++;
+                dialogText.textContent = allPhrases[currentIndex];
+
+                if (speakers[currentIndex] === "дерево") {
+                    dialogText.classList.remove('player-text');
+                } else {
+                    dialogText.classList.add('player-text');
+                }
+            }
+
+            if (currentIndex === allPhrases.length - 1) {
+                followButton.style.display = 'inline-block';
+            }
+        }
+
+        dialogText.addEventListener('click', showNextPhrase);
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') showNextPhrase();
+        });
+    </script>
+</body>
+</html>

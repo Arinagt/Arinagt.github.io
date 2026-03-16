@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="Favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="tree_template.css">
+    <title>Осина</title>
+</head>
+<body>
+    <main>
+        <section class="game-screen">
+            <img src="osina.jpeg" alt="Осина" width="500" style="margin-left: 100px";>
+            <img src="osina_list.gif" alt="Ветвь осины" class="tree-image-right" width="300" style="margin-right: 50px">
+            <img src="people.png" alt="Игрок" width="150" style="margin-left: -100px";>
+
+            <div class="game-bar">
+
+                <div class="dialog-text" id="dialogText">
+                    Здравствуйте, а почему ваши листики дрожат? Вам холодно? Ветерок вроде тёплый…
+                </div>
+
+                <!-- КНОПКА (добавлена) -->
+                <a href="for_kid_3.html" class="follow-button" id="followButton">
+                    Вернуться назад →
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        const allPhrases = [
+            "Здравствуйте, а почему ваши листики дрожат? Вам холодно? Ветерок вроде тёплый…",
+            "Мне не холодно, солнышко. Это листья мои играются с ветром — видишь, на длинных плоских черешочках висят, оттого и кольшутся от малейшего дуновения. Из‑за этого ещё в стародавние времена прозвали меня «дрожащим тополем», а уж потом имя в «осину» и перетекло.",
+            "Тополем? А почему именно тополем?",
+            "Двоюродный брат он мне, оттого и путают. Растём по всей России, кроме полярных пустошей да знойных степей, как и тополи. Правда, они выше тянутся к небу, а мы, осины, пошире раскидываемся, от одного корня целые рощи поднимаются.",
+            "А под вами и вправду грибы растут?",
+            "Конечно! Грибы-хитрецы под мной прячутся: шляпки их осенью в те же золотисто‑багровые тона раскрашены, что и мои опавшие листья. Крепко держатся за корни мои — те, кстати, ого-го какие: вглубь уходят, любой пожар переживут!",
+            "Даже пожар? Круто! А ещё что‑нибудь расскажите?",
+            "Много чего поведать могла бы, да времени нет, не может дольше дух разговор наш поддержать. Удачной тебе дороги",
+
+
+        ];
+
+        const speakers = [
+            "игрок","дерево","игрок", "дерево", "игрок", "дерево", "игрок","дерево"
+        ];
+
+        let currentIndex = 0;
+        const dialogText = document.getElementById('dialogText');
+        const followButton = document.getElementById('followButton');
+
+        dialogText.classList.add('player-text');
+
+        function showNextPhrase() {
+            if (currentIndex < allPhrases.length - 1) {
+                currentIndex++;
+                dialogText.textContent = allPhrases[currentIndex];
+
+                if (speakers[currentIndex] === "дерево") {
+                    dialogText.classList.remove('player-text');
+                } else {
+                    dialogText.classList.add('player-text');
+                }
+            }
+
+            if (currentIndex === allPhrases.length - 1) {
+                followButton.style.display = 'inline-block';
+            }
+        }
+
+        dialogText.addEventListener('click', showNextPhrase);
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') showNextPhrase();
+        });
+    </script>
+</body>
+</html>

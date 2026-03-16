@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="Favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="tree_template.css">
+    <title>Ель</title>
+</head>
+<body>
+    <main>
+        <section class="game-screen">
+            <img src="el.jpg" alt="Ель" width="500" style="margin-left: 100px";>
+            <img src="vetv_el.jpg" alt="Ветвь ели" class="tree-image-right">
+            <img src="people.png" alt="Игрок" width="100" style="margin-left: -100px";>
+
+            <div class="game-bar">
+
+                <div class="dialog-text" id="dialogText">
+                    Приветствую тебя, малыш.
+                </div>
+
+                <!-- КНОПКА (добавлена) -->
+                <a href="for_kid_3.html" class="follow-button" id="followButton">
+                    Вернуться назад →
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        const allPhrases = [
+            "Приветствую тебя, малыш.",
+            "Я вообще-то не малыш!",
+            "Для меня все дети — малыши. Уж за двести лет и не таких видала. Дух лесной передал мне твоё желание узнать о моём виде побольше. Знаешь ли ты что-то уже?",
+            "Да почти всё! Ты растёшь в лесах и горах, высокая, всегда зелёная, зимой тебя украшают к празднику. Ты относишься к хвойным деревьям. Ну а что ещё-то может быть?",
+            "Какой милый малыш... Только это далеко не всё. Живём мы, ели, около трёхсот лет. Однако у подруги моей из Швеции есть пра-пра-пра-дедушка — Старый Тикко. Ему более девяти с половиной тысяч лет!",
+            "Почти десять тысяч?! А как он так долго живёт?",
+            "Хитростью. Когда наш старый ствол отмирает, мы пускаем новый побег. И этот побег — тоже мы. Вот так и получается.",
+            "Вау! А как много вас, елей, в нашей республике? Куда ни глянь в лесу — вроде только вы.",
+            "Не только мы, конечно. Но на территории КЧР нас, хвойных лесов, около девяноста пяти тысяч гектаров. Это как сто тридцать тысяч футбольных полей.",
+            "Так много! А что ещё интересного расскажешь?",
+            "Главный наш природный враг — ветер. К пятнадцати годам наш главный корень отмирает, и хотя корней становится много, все они разветвлённые и держатся в верхнем слое почвы. Мы в ходе эволюции для экономии ресурсов так делать научились, а ветру... ему что в одно ухо влетело, что в другое — нет ему до наших сложностей дела.",
+            "Не знал(а), что ели не любят ветер.",
+            "Теперь будешь знать, малыш. А мне пора: колдовство духа рассеивается. Удачи тебе и... не ломай еловые ветки, ладно?"
+        ];
+
+        const speakers = [
+            "дерево","игрок", "дерево", "игрок", "дерево", "игрок","дерево", "игрок", "дерево", "игрок", "дерево", "игрок", "дерево"
+        ];
+
+        let currentIndex = 0;
+        const dialogText = document.getElementById('dialogText');
+        const followButton = document.getElementById('followButton');
+
+
+
+        function showNextPhrase() {
+            if (currentIndex < allPhrases.length - 1) {
+                currentIndex++;
+                dialogText.textContent = allPhrases[currentIndex];
+
+                if (speakers[currentIndex] === "дерево") {
+                    dialogText.classList.remove('player-text');
+                } else {
+                    dialogText.classList.add('player-text');
+                }
+            }
+
+            if (currentIndex === allPhrases.length - 1) {
+                followButton.style.display = 'inline-block';
+            }
+        }
+
+        dialogText.addEventListener('click', showNextPhrase);
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') showNextPhrase();
+        });
+    </script>
+</body>
+</html>
