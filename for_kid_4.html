@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="Favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="style_header.css">
+    <link rel="stylesheet" href="for_kid_2.css">
+    <title>Детям - продолжение</title>
+</head>
+<body>
+    <header class="header">
+        <a href="index.html">
+            <img class="logo" src="logo.png" alt="Логотип">
+        </a>
+        <nav class="main_nav">
+            <ul>
+                <li><a href="about.html">О нас</a></li>
+                <li><a href="forest_watch.html">Лесной дозор</a></li>
+                <li><a href="for_kids.html">Детям</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="game-screen">
+            <div class="game-background"></div>
+
+            <div class="game-bar">
+                <div class="character-box">
+                    <div class="bar-gif">
+                        <img src="soul_of_forest.gif" alt="Лесной дух">
+                    </div>
+                </div>
+
+                <div class="dialog-text" id="dialogText">
+                    Ну, что дитя поведали деревья тебе свою историю?
+                </div>
+
+                <!-- КНОПКА (добавлена) -->
+                <a href="roslesifo.html" class="follow-button" id="followButton">
+                    Закрыть глаза →
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        const allPhrases = [
+            "Ну, что, дитя? Поведали деревья тебе свою историю?",
+            "Ага, слушай, а кто же следит за всеми лесами в республике? Ведь кто-то же учитывает, какие деревья и где растут, сколько им лет и т.д.?",
+            "Этим и многим другим в нашей республике занимается организация Рослесинфорг. Желаешь узнать о ней побольше?",
+            "Конечно, нужно опять закрыть глаза?",
+            "Всё верно."
+        ];
+
+        const speakers = [
+            "дух","игрок","дух", "игрок", "дух"
+        ];
+
+        let currentIndex = 0;
+        const dialogText = document.getElementById('dialogText');
+        const followButton = document.getElementById('followButton');
+
+
+        function showNextPhrase() {
+            if (currentIndex < allPhrases.length - 1) {
+                currentIndex++;
+                dialogText.textContent = allPhrases[currentIndex];
+
+                if (speakers[currentIndex] === "дух") {
+                    dialogText.classList.remove('player-text');
+                } else {
+                    dialogText.classList.add('player-text');
+                }
+            }
+
+            if (currentIndex === allPhrases.length - 1) {
+                followButton.style.display = 'inline-block';
+            }
+        }
+
+        dialogText.addEventListener('click', showNextPhrase);
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') showNextPhrase();
+        });
+    </script>
+</body>
+</html>
