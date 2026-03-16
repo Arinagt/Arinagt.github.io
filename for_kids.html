@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="Favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="style_header.css">
+    <link rel="stylesheet" href="for_kids.css">
+    <title>Путешествие с духом</title>
+</head>
+<body>
+    <header class="header">
+        <a href="index.html">
+            <img class="logo" src="logo.png" alt="Логотип">
+        </a>
+        <nav class="main_nav">
+            <ul>
+                <li><a href="about.html">О нас</a></li>
+                <li><a href="forest_watch.html">Лесной дозор</a></li>
+                <li><a href="for_kids.html">Детям</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="game-screen">
+            <div class="game-background"></div>
+
+            <div class="game-bar">
+                <div class="character-box">
+                    <div class="bar-gif">
+                        <img src="soul_of_forest.gif" alt="Лесной дух">
+                    </div>
+                </div>
+
+                <div class="dialog-text" id="dialogText">
+                    Здравствуй, юная заблудшая душа. Как ты попал(а) сюда?
+                </div>
+
+                <!-- КНОПКА (добавлена) -->
+                <a href="for_kid_2.html" class="follow-button" id="followButton">
+                    Идти за духом →
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        const allPhrases = [
+            "Здравствуй, юная заблудшая душа. Как ты попал(а) сюда?",
+            "Я бродил(а) по лесу и вдруг небо заволокли тучи, всё потемнело и появился ты... Кто ты?",
+            "Я блуждающий по лесу дух. Ищу заблудшие души, обучаю их и помогаю им выбраться. Дитя, скажи мне, что ты знаешь об этих лесах?",
+            "Я... Ну просто лес, в нём деревья растут э-ээ разные и так далее, эм-мм животные живут тут ну и ... вроде как и любой другой лес. Ну за исключением тебя.",
+            "Каждый лес разный, дитя. В каждом свои деревья и зверьё обитает. Ты ещё мал(а) и многого не знаешь, позволь мне просветить тебя.",
+            "Пойдём со мной."
+        ];
+
+        const speakers = [
+            "дух", "игрок", "дух", "игрок", "дух", "дух"
+        ];
+
+        let currentIndex = 0;
+        const dialogText = document.getElementById('dialogText');
+        const followButton = document.getElementById('followButton');
+
+        function showNextPhrase() {
+            if (currentIndex < allPhrases.length - 1) {
+                currentIndex++;
+                dialogText.textContent = allPhrases[currentIndex];
+
+                if (speakers[currentIndex] === "дух") {
+                    dialogText.classList.remove('player-text');
+                } else {
+                    dialogText.classList.add('player-text');
+                }
+            }
+
+            if (currentIndex === allPhrases.length - 1) {
+                followButton.style.display = 'inline-block';
+            }
+        }
+
+        dialogText.addEventListener('click', showNextPhrase);
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') showNextPhrase();
+        });
+    </script>
+</body>
+</html>

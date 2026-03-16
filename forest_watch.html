@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вход</title>
+    <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="style_header.css">
+</head>
+<body>
+<header class="header">
+        <a href="index.html">
+            <img class="logo" src="logo.png" alt="Логотип Рослесинфорг">
+        </a>
+        <nav class="main_nav">
+            <ul>
+                <li><a href="about.html">О нас</a></li>
+                <li><a href="forest_watch.html">Лесной дозор</a></li>
+                <li><a href="for_kids.html">Детям</a></li>
+            </ul>
+        </nav>
+    </header>
+<main>
+    <div class="login-container">
+        <h2>Введите код</h2>
+
+        <input type="text" id="login" placeholder="1 часть кода">
+        <input type="text" id="password" placeholder="2 часть кода">
+
+        <button onclick="checkPassword()">Войти</button>
+
+        <div class="error" id="errorMessage">Неверный код!</div>
+    </div>
+</main>
+    <script>
+        function checkPassword() {
+            const login = document.getElementById('login').value;
+            const password = document.getElementById('password').value;
+
+            if (login === 'лесной' && password === 'страж') {
+                window.location.href = 'secret.html';
+            } else {
+                document.getElementById('errorMessage').style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>
