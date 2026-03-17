@@ -28,6 +28,9 @@ main {
 .block-2 {
     background-image: url('rosles2.png');
     background-color: #94c460;
+    background-size: auto; /* Изменяем с cover на auto */
+    background-position: top left; /* Картинка начинается с левого верхнего угла */
+    background-repeat: no-repeat; /* Чтобы не повторялась */
     border-top: 4px solid white;
 }
 
