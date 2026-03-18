@@ -56,7 +56,7 @@
     object-fit: cover;
 }
 
-/* Текст диалога (дух - обычный шрифт) */
+/* Текст диалога  */
 .dialog-text {
     font-family: 'Segoe Print';
     font-size: 20px;
@@ -67,7 +67,7 @@
     cursor: pointer;
 }
 
-/* Текст игрока - курсив */
+/* Текст игрока  */
 .dialog-text.player-text {
     font-family: 'Comic Sans MS';
     font-style: italic;
@@ -75,7 +75,7 @@
     text-align: right;
 }
 
-/* ===== КНОПКА КАК ССЫЛКА (максимально просто) ===== */
+/* ===== КНОПКА КАК ССЫЛКА  ===== */
 .follow-button {
     display: none;
     color: white;
@@ -89,7 +89,7 @@
 }
 
 
-/* Чуть уменьшаем отступы у текста, чтобы кнопка влезла */
+
 .dialog-text {
-    margin: 0 10px;  /* Было 20px, стало 10px */
+    margin: 0 10px;
 }

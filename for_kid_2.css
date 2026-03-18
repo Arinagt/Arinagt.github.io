@@ -72,8 +72,8 @@
 
 .special-phrase {
     text-align: center !important;
-    font-family: 'Book Antiqua'; /* Или любой другой шрифт */
-    font-size: 24px !important; /* Можно изменить размер */
+    font-family: 'Book Antiqua';
+    font-size: 24px !important;
     color: yellow !important;
 }
 /* Текст игрока - курсив */
@@ -84,7 +84,7 @@
     text-align: right;
 }
 
-/* ===== КНОПКА КАК ССЫЛКА (максимально просто) ===== */
+/* ===== КНОПКА КАК ССЫЛКА  ===== */
 .follow-button {
     display: none;
     color: white;
@@ -98,7 +98,7 @@
 }
 
 
-/* Чуть уменьшаем отступы у текста, чтобы кнопка влезла */
+
 .dialog-text {
-    margin: 0 10px;  /* Было 20px, стало 10px */
+    margin: 0 10px;
 }

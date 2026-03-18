@@ -17,7 +17,7 @@
 
             <div class="game-bar">
                 <div class="dialog-text" id="dialogText">
-                    <!-- Здесь будет динамический текст -->
+
                 </div>
 
                 <!-- КНОПКА -->
@@ -45,7 +45,7 @@
             "Привет! Ты вероятно тот человечек, про которого берёзе говорил дух? Ну временно берёзы нет, но затоооо есть я! А кто я тебе знать не обязательно. Ты кстати уже видел(а) на главной странице сайта вкладку \"Лесной дозор\"? Не смотрел(а) что там? Посмотрииииии))) Но сначала!!!! Вот тебе тебе 1 часть ключа: \"лесной\". И помни! Реальность — иллюзия, вселенная — голограмма, скупай золото, пока!"
         ];
 
-        // Кто говорит (игрок или ???)
+        // Кто говорит
         const speakers = [
             "игрок",   // фраза 0
             "игрок",   // фраза 1
@@ -71,9 +71,9 @@
             "unknown-normal"   // фраза 11
         ];
 
-        // Временные настройки (в миллисекундах)
+        // Временные настройки
         const TIME_SETTINGS = {
-            UNKNOWN_START_DELAY: 40000,     // 38 секунд до первой фразы unknown
+            UNKNOWN_START_DELAY: 40000,
             UNKNOWN_PHRASE_INTERVAL: 7500,   // 5 секунд между фразами 6-10
             FINAL_PHRASE_DELAY: 11000        // 7 секунд после 10-й фразы до 11-й
         };
@@ -91,10 +91,10 @@
         // Функция обновления текста и стиля
         function updateDialog(index) {
             if (index < allPhrases.length) {
-                // Просто текст, без HTML
+
                 dialogText.textContent = allPhrases[index];
 
-                // Удаляем все классы
+
                 dialogText.className = 'dialog-text';
 
                 // Добавляем класс в зависимости от говорящего
@@ -141,7 +141,7 @@
                 updateDialog(currentIndex);
 
                 if (currentIndex === 10) {
-                    // Показали красную ВВЕРХ, запускаем таймер на 11-ю
+
                     finalPhraseTimeout = setTimeout(showFinalPhrase, TIME_SETTINGS.FINAL_PHRASE_DELAY);
                 } else if (currentIndex < 10) {
                     // Продолжаем цепочку unknown фраз
@@ -156,7 +156,7 @@
 
             unknownStarted = true;
 
-            // Очищаем все таймеры
+
             if (autoTimeout) clearTimeout(autoTimeout);
             if (finalPhraseTimeout) clearTimeout(finalPhraseTimeout);
 
@@ -173,9 +173,7 @@
 
         // Функция для ручного переключения (только для диалогов игрока)
         function manualNext() {
-            // Можно переключать только если:
-            // 1. Не начались еще фразы unknown
-            // 2. Мы на фразах игрока (индекс < 6)
+
             if (!unknownStarted && currentIndex < 5) {
                 const nextSpeaker = speakers[currentIndex + 1];
 
@@ -191,8 +189,7 @@
             currentIndex = 0;
             updateDialog(0);
 
-            // Запускаем таймер на 38 секунд для начала фраз unknown
-            // Этот таймер сработает независимо от действий игрока
+
             unknownStartTimeout = setTimeout(startUnknown, TIME_SETTINGS.UNKNOWN_START_DELAY);
         }
 
